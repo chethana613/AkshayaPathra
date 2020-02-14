@@ -62,7 +62,8 @@ public class SchemeServiceImpl implements SchemeService{
     		BeanUtils.copyProperties(userScheme, userSchemeDto);
     		userSchemeDto.setSchemeId(userScheme.getSchemeId().getSchemeId());
     		userSchemeDto.setSchemeName(userScheme.getSchemeId().getSchemeName());
-    		userSchemeDto.setUserId(userScheme.getUserId().getUserId());
+    		userSchemeDto.setUserName(userScheme.getUserId().getName());
+    		userSchemeDto.setEmail(userScheme.getUserId().getEmail());
     		userSchemeDtos.add(userSchemeDto);
     	});
     	return userSchemeDtos;
