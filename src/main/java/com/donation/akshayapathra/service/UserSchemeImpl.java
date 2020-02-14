@@ -112,6 +112,7 @@ public class UserSchemeImpl implements UserSchemeService {
 
 		sendEmail(donateResponseDto);
 		
+		sendEmail(donateResponseDto);
 		return donateResponseDto;
 	}
 

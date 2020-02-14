@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.entity.User;
@@ -35,16 +36,17 @@ public class SchemeServiceTest {
 	@Mock
 	UserSchemeRepository userSchemeRepository;
 	
-	Scheme scheme = new Scheme();
-	List<Scheme> schemes = new ArrayList<Scheme>();
-	UserScheme userScheme = new UserScheme();
-	List<UserScheme> userSchemes = new ArrayList<>();
-	UserSchemeDto UserSchemeDto = new UserSchemeDto();
-	User user = new User();
+	UserScheme userScheme= new UserScheme();
+	List<UserScheme> userSchemeList= new ArrayList<>();
+	List<UserScheme> userSchemeList1= new ArrayList<>();
+	Scheme scheme= new Scheme();
+	User user= new User();
+	List<Scheme> schemes= new ArrayList<Scheme>();
+	List<UserScheme> userSchemes= new ArrayList<>();
 	
 	@Before
-	public void setUp() {
-	
+	public void init() {
+				
 		user.setUserId(1);
 		scheme.setAmount(20000);
 		scheme.setDescription("for Cancer");
@@ -57,7 +59,10 @@ public class SchemeServiceTest {
 		userScheme.setSchemeId(scheme);
 		userScheme.setUserId(user);
 		userSchemes.add(userScheme);
+		userSchemeList.add(userScheme);
 	}
+	
+	
 	
 	@Test
 	public void availableSchemesTest() throws SchemeNotFoundException {
@@ -74,7 +79,19 @@ public class SchemeServiceTest {
 		schemeServiceImpl.viewAllDonations();
 	}
 	
-	@Test
+	/*
+	 * @Test public void getAnalysisNoList() {
+	 * Mockito.when(userSchemeRepository.findAll()).thenReturn(userSchemeList);
+	 * List<AnalysisResponseDto> userSchemeList=schemeServiceImpl.getAnalysis();
+	 * assertEquals(0, userSchemeList.size()); }
+	 */
+	
+	/*
+	 * @Test public void getAnalysis() {
+	 * Mockito.when(userSchemeRepository.findAll()).thenReturn(userSchemeList1);
+	 * List<AnalysisResponseDto> userSchemeList=schemeServiceImpl.getAnalysis();
+	 * assertEquals(1, userSchemeList.size()); }
+	 */
 	public void testGetUserSchemes() throws SchemeNotFoundException {
 		Mockito.when(schemeRepository.findById(1)).thenReturn(Optional.of(scheme));
 		Mockito.when(userSchemeRepository.findAllBySchemeId(scheme)).thenReturn(userSchemes);

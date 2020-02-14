@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
@@ -55,6 +56,11 @@ public class SchemeControllerTest {
 		Mockito.when(schemeService.viewAllDonations()).thenReturn(schemes);
 		ResponseEntity<List<Scheme>> actual = schemeController.viewAllDonations();
 		assertNotNull(actual);
+	}
+	@Test
+	public void getAnalysis() {
+		ResponseEntity<List<AnalysisResponseDto>> response=schemeController.getAnalysis();
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
 	}
 
 	@Test

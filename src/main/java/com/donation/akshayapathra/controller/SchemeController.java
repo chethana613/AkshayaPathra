@@ -69,7 +69,7 @@ public class SchemeController {
 	 * @throws SchemesNotFoundException - thrown when Schemes are not available
 	 * @since Feb-14-2020
 	 */
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<List<Scheme>> viewAllDonations() throws SchemeNotFoundException {
 		log.error("Entered into ViewAllDonations method in SchemeController ");
 		return ResponseEntity.ok().body(schemeService.viewAllDonations());
