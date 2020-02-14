@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +12,9 @@ import com.donation.akshayapathra.constant.Constant;
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.entity.UserScheme;
-import com.donation.akshayapathra.exception.AdminNotFoundException;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.repository.SchemeRepository;
 import com.donation.akshayapathra.repository.UserSchemeRepository;
-import com.donation.akshayapathra.entity.Scheme;
-import com.donation.akshayapathra.exception.SchemeNotFoundException;
-import com.donation.akshayapathra.repository.SchemeRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,7 +54,7 @@ public class SchemeServiceImpl implements SchemeService{
     		log.error("Exception occured in SchemeServiceImpl getUserSchemes method:"+Constant.SCHEME_NOT_FOUND);
     		throw new SchemeNotFoundException(Constant.SCHEME_NOT_FOUND);
     	}
-    	log.info("Entering into SchemeServiceImpl getUserSchemes method: getting userScheme details");
+		log.info("Entering into SchemeServiceImpl getUserSchemes method: getting userScheme details");
     	List<UserScheme> userSchemes = userSchemeRepository.findAllBySchemeId(scheme.get());
     	List<UserSchemeDto> userSchemeDtos = new ArrayList<>();
     	userSchemes.forEach(userScheme -> {
