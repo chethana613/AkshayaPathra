@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentType;
+import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentMode;
 
 import lombok.Data;
 
@@ -28,7 +28,7 @@ public class UserScheme {
 	@JoinColumn(name = "scheme_id")
 	private Scheme schemeId;
 	@Enumerated(EnumType.STRING)
-	private PaymentType paymentMode;
+	private PaymentMode paymentMode;
 	private String paymentStatus;
 	private Byte taxInvoice;
 	private LocalDate date;
