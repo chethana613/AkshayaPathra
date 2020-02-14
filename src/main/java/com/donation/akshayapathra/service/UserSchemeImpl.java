@@ -1,4 +1,4 @@
-package com.donation.akshayapathra.service;
+	package com.donation.akshayapathra.service;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -89,6 +89,19 @@ public class UserSchemeImpl implements UserSchemeService {
 
 		DonateResponseDto donateResponseDto = new DonateResponseDto();
 		donateResponseDto.setUserId(user.getUserId());
+		donateResponseDto.setName(user.getName());
+		donateResponseDto.setPanNumber(user.getPanNumber());
+		donateResponseDto.setMobile(user.getMobile());
+		donateResponseDto.setEmail(user.getEmail());
+		
+		donateResponseDto.setPaymentMode(userScheme.getPaymentMode());
+		donateResponseDto.setDate(userScheme.getDate());
+		donateResponseDto.setSchemeName(schemeResponse.get().getSchemeName());
+		donateResponseDto.setDescription(schemeResponse.get().getDescription());
+		donateResponseDto.setAmount(schemeResponse.get().getAmount());
+		
+		donateResponseDto.setTaxBenefitAmount(schemeResponse.get().getTaxBenefitAmount());
+		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
 		return donateResponseDto;
 	}
 }
