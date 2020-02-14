@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import com.donation.akshayapathra.constant.Constant;
@@ -34,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
+@EnableAsync
 public class UserSchemeImpl implements UserSchemeService {
 	@Autowired
 	SchemeRepository schemeRepository;
@@ -113,6 +116,7 @@ public class UserSchemeImpl implements UserSchemeService {
 		return donateResponseDto;
 	}
 	
+	@Async
 	public void sendEmail(DonateResponseDto donateResponseDto) {
 		log.info("Entering into sendEmail of UserSchemeImpl");
 		String message="Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
