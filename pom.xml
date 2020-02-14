@@ -17,6 +17,19 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<java.version>1.8</java.version>
+			<sonar.coverage.exclusions>
+			**/dto/*,
+			**/entity/*,
+			**/config/*,
+			**/constant/*,
+			**/GlobalExceptionHandler.java,
+			**/AkshayaPathraApplication.java,
+			**/PaymentService.java,
+			**/PaymentRegistry.java,
+			**/Paytm.java,
+			**/Phonepe.java,
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -48,6 +61,10 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
