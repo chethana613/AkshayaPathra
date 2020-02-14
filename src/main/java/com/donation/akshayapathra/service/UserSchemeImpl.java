@@ -1,4 +1,4 @@
-package com.donation.akshayapathra.service;
+	package com.donation.akshayapathra.service;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import com.donation.akshayapathra.constant.Constant;
@@ -19,6 +21,7 @@ import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.repository.SchemeRepository;
 import com.donation.akshayapathra.repository.UserRepository;
 import com.donation.akshayapathra.repository.UserSchemeRepository;
+import com.donation.akshayapathra.util.SendMail;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
+@EnableAsync
 public class UserSchemeImpl implements UserSchemeService {
 	@Autowired
 	SchemeRepository schemeRepository;
@@ -45,6 +49,9 @@ public class UserSchemeImpl implements UserSchemeService {
 
 	@Autowired
 	PaymentRegistry paymentRegistry;
+	
+	@Autowired
+	SendMail sendMail;
 
 	/**
 	 * This method is used to donatePayment for the charity based on any theme
@@ -87,8 +94,32 @@ public class UserSchemeImpl implements UserSchemeService {
 		userScheme.setDate(LocalDate.now());
 		userSchemeRepository.save(userScheme);
 
+		
+		
 		DonateResponseDto donateResponseDto = new DonateResponseDto();
 		donateResponseDto.setUserId(user.getUserId());
+		donateResponseDto.setName(user.getName());
+		donateResponseDto.setPanNumber(user.getPanNumber());
+		donateResponseDto.setMobile(user.getMobile());
+		donateResponseDto.setEmail(user.getEmail());
+		
+		donateResponseDto.setPaymentMode(userScheme.getPaymentMode());
+		donateResponseDto.setDate(userScheme.getDate());
+		donateResponseDto.setSchemeName(schemeResponse.get().getSchemeName());
+		donateResponseDto.setDescription(schemeResponse.get().getDescription());
+		donateResponseDto.setAmount(schemeResponse.get().getAmount());
+		
+		donateResponseDto.setTaxBenefitAmount(schemeResponse.get().getTaxBenefitAmount());
+		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
+		
+		sendEmail(donateResponseDto);
 		return donateResponseDto;
+	}
+	
+	@Async
+	public void sendEmail(DonateResponseDto donateResponseDto) {
+		log.info("Entering into sendEmail of UserSchemeImpl");
+		String message="Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
+		sendMail.SendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
 	}
 }
