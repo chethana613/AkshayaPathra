@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentType;
+
 import lombok.Data;
 
 @Entity
@@ -23,7 +25,7 @@ public class UserScheme {
 	@ManyToOne
 	@JoinColumn(name = "scheme_id")
 	private Scheme schemeId;
-	private String paymentMode;
+	private PaymentType paymentMode;
 	private String paymentStatus;
 	private Byte taxInvoice;
 	private LocalDate date;
