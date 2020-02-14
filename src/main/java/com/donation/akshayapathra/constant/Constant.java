@@ -18,5 +18,7 @@ public class Constant {
 
 	public static final String SCHEME_NOT_FOUND_EXCEPTION = "No Schemes Are Available!";
 	
+	public static final String PHONEPE_MSG="Payment Successfull using PhonePe";
+	public static final String PAYTM_MSG="Payment Successfull using PayTm";
 
 }
