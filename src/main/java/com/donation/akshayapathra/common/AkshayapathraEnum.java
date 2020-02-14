@@ -9,7 +9,6 @@ public class AkshayapathraEnum {
 	 * @since 14-02-2020
 	 */
 	public enum PaymentMode {
-
-		PAYTM, PHONEPE;
+			PAYTM, PHONEPE;
 	}
 }
