@@ -81,8 +81,9 @@ public class UserSchemeImpl implements UserSchemeService {
 			user = new User();
 			BeanUtils.copyProperties(donateRequestDto, user);
 			userRepository.save(user);
-		} else
+		} else {
 			user = userResponse.get();
+		}
 
 		String message = paymentRegistry.getServiceBean(donateRequestDto.getPaymentMode().toString()).payment();
 
@@ -120,7 +121,7 @@ public class UserSchemeImpl implements UserSchemeService {
 	public void sendEmail(DonateResponseDto donateResponseDto) {
 		log.info("Entering into sendEmail of UserSchemeImpl");
 		String message = "Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
-		sendMail.SendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
+		sendMail.sendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
 	}
 		
 }
