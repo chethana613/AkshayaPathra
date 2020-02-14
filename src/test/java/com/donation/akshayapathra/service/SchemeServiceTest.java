@@ -1,10 +1,12 @@
 package com.donation.akshayapathra.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,9 +14,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.entity.Scheme;
+import com.donation.akshayapathra.entity.UserScheme;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.repository.SchemeRepository;
+import com.donation.akshayapathra.repository.UserSchemeRepository;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class SchemeServiceTest {
@@ -24,6 +29,22 @@ public class SchemeServiceTest {
 	
 	@InjectMocks
 	SchemeServiceImpl schemeServiceImpl;
+	
+	@Mock
+	UserSchemeRepository userSchemeRepository;
+	
+	UserScheme userScheme= new UserScheme();
+	List<UserScheme> userSchemeList= new ArrayList<>();
+	List<UserScheme> userSchemeList1= new ArrayList<>();
+	Scheme scheme= new Scheme();
+	
+	@Before
+	public void init() {
+		scheme.setSchemeId(1);
+		userScheme.setSchemeId(scheme);
+		userScheme.setUserSchemeId(1);
+		userSchemeList1.add(userScheme);
+	}
 	
 	@Test
 	public void availableSchemesTest() throws SchemeNotFoundException {
@@ -56,5 +77,19 @@ public class SchemeServiceTest {
 		List<Scheme> schemes = new ArrayList<Scheme>();
 		schemes.add(null);
 		schemeServiceImpl.viewAllDonations();
+	}
+	
+	@Test
+	public void getAnalysisNoList() {
+		Mockito.when(userSchemeRepository.findAll()).thenReturn(userSchemeList);
+		List<AnalysisResponseDto> userSchemeList=schemeServiceImpl.getAnalysis();
+		assertEquals(0, userSchemeList.size());
+	}
+	
+	@Test
+	public void getAnalysis() {
+		Mockito.when(userSchemeRepository.findAll()).thenReturn(userSchemeList1);
+		List<AnalysisResponseDto> userSchemeList=schemeServiceImpl.getAnalysis();
+		assertEquals(1, userSchemeList.size());
 	}
 }

@@ -1,6 +1,7 @@
 package com.donation.akshayapathra.controller;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.service.SchemeService;
@@ -51,5 +54,9 @@ public class SchemeControllerTest {
 		assertNotNull(actual);
 		
 	}
-	
+	@Test
+	public void getAnalysis() {
+		ResponseEntity<List<AnalysisResponseDto>> response=schemeController.getAnalysis();
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
+	}
 }

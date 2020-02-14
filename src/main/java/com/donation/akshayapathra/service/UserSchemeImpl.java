@@ -112,7 +112,7 @@ public class UserSchemeImpl implements UserSchemeService {
 		donateResponseDto.setTaxBenefitAmount(schemeResponse.get().getTaxBenefitAmount());
 		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
 		
-		//sendEmail(donateResponseDto);
+		sendEmail(donateResponseDto);
 		return donateResponseDto;
 	}
 	
@@ -122,8 +122,5 @@ public class UserSchemeImpl implements UserSchemeService {
 		String message="Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
 		sendMail.SendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
 	}
-		DonateResponseDto donateResponseDto = new DonateResponseDto();
-		donateResponseDto.setUserId(user.getUserId());
-		return donateResponseDto;
-	}
+		
 }
