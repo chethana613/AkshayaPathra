@@ -1,4 +1,4 @@
-	package com.donation.akshayapathra.service;
+package com.donation.akshayapathra.service;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -49,7 +49,7 @@ public class UserSchemeImpl implements UserSchemeService {
 
 	@Autowired
 	PaymentRegistry paymentRegistry;
-	
+
 	@Autowired
 	SendMail sendMail;
 
@@ -94,32 +94,30 @@ public class UserSchemeImpl implements UserSchemeService {
 		userScheme.setDate(LocalDate.now());
 		userSchemeRepository.save(userScheme);
 
-		
-		
 		DonateResponseDto donateResponseDto = new DonateResponseDto();
 		donateResponseDto.setUserId(user.getUserId());
 		donateResponseDto.setName(user.getName());
 		donateResponseDto.setPanNumber(user.getPanNumber());
 		donateResponseDto.setMobile(user.getMobile());
 		donateResponseDto.setEmail(user.getEmail());
-		
+
 		donateResponseDto.setPaymentMode(userScheme.getPaymentMode());
 		donateResponseDto.setDate(userScheme.getDate());
 		donateResponseDto.setSchemeName(schemeResponse.get().getSchemeName());
 		donateResponseDto.setDescription(schemeResponse.get().getDescription());
 		donateResponseDto.setAmount(schemeResponse.get().getAmount());
-		
+
 		donateResponseDto.setTaxBenefitAmount(schemeResponse.get().getTaxBenefitAmount());
 		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
-		
+
 		sendEmail(donateResponseDto);
 		return donateResponseDto;
 	}
-	
+
 	@Async
 	public void sendEmail(DonateResponseDto donateResponseDto) {
 		log.info("Entering into sendEmail of UserSchemeImpl");
-		String message="Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
+		String message = "Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
 		sendMail.SendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
 	}
 }
