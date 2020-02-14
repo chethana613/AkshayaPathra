@@ -54,8 +54,9 @@ public class SchemeControllerTest {
 		assertNotNull(actual);
 		
 	}
+	@Test
 	public void getAnalysis() {
 		ResponseEntity<List<AnalysisResponseDto>> response=schemeController.getAnalysis();
-		assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
 	}
 }
