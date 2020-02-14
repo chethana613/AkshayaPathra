@@ -94,8 +94,12 @@ public class SchemeServiceImpl implements SchemeService{
 
 	public List<AnalysisResponseDto> getAnalysis() {
 		log.info("Entering into getAnalysis method of SchemeServiceImpl");
-		List<UserScheme> userSchemeList=userSchemeRepository.findAll();
 		List<AnalysisResponseDto> analysisResponseDtoList= new ArrayList<>();
+		List<UserScheme> userSchemeList=userSchemeRepository.findAll();
+		if(userSchemeList.isEmpty()) {
+			log.debug("No User schemes available");
+			return analysisResponseDtoList;	
+		}
 		Map<Scheme,Integer> filteredSchemes=userSchemeList.stream().collect(Collectors.groupingBy(UserScheme::getSchemeId, Collectors.collectingAndThen(
 				Collectors.mapping(UserScheme::getSchemeId, Collectors.toList()), List::size)));
 		filteredSchemes.forEach((userScheme,schemeCount)->{
