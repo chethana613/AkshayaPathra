@@ -14,8 +14,9 @@ public class Constant {
 	public static final String AUTHENTICATION_FAILED = "Authentication Failed";
 	public static final String ADMIN_NOT_FOUND = "Admin not found";
 	
-	public static final String SCHEME_NOT_FOUND = "Admin not found";
+	public static final String SCHEME_NOT_FOUND = "Scheme not found";
 
+	public static final String SCHEME_NOT_FOUND_EXCEPTION = "No Schemes Are Available!";
 	
 
 }
