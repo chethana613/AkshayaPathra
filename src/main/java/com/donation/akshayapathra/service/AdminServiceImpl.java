@@ -11,7 +11,6 @@ import com.donation.akshayapathra.dto.LoginResponseDto;
 import com.donation.akshayapathra.entity.Admin;
 import com.donation.akshayapathra.exception.AdminNotFoundException;
 import com.donation.akshayapathra.repository.AdminRepository;
-import com.donation.akshayapathra.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
