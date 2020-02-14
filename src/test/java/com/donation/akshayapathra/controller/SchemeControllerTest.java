@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,9 +27,14 @@ public class SchemeControllerTest {
 	@Mock
 	SchemeService schemeService;
 	
-	@Test
-	public void availableSchemesTest() throws SchemeNotFoundException {
-		Scheme scheme = new Scheme();
+	Scheme scheme = null;
+	List<Scheme> schemes = null;
+	
+	
+	@Before
+	public void setup() {
+		scheme = new Scheme();
+		schemes = new ArrayList<Scheme>();
 		scheme.setAmount(20000);
 		scheme.setDescription("for Cancer");
 		scheme.setImageUrl("https://www.worldvision.in/CMSAdmin/Uploads/06012020120226921Website-article.jpg");
@@ -42,14 +48,25 @@ public class SchemeControllerTest {
 		scheme.setSchemeName("Medical");
 		scheme.setTaxBenefitDescription("you will get under 80c");
 		scheme.setTaxBenefitAmount(5000);
-		List<Scheme> schemes = new ArrayList<Scheme>();
 		schemes.add(scheme);
 		schemes.add(scheme1);
-		
+	}
+	
+	@Test
+	public void availableSchemesTest() throws SchemeNotFoundException {
 		Mockito.when(schemeService.viewAllDonations()).thenReturn(schemes);
 		ResponseEntity<List<Scheme>> actual = schemeController.viewAllDonations();
 		assertNotNull(actual);
 		
+	}
+	@Test
+	public void negativeAvailableSchemes() throws SchemeNotFoundException {
+		scheme = new Scheme();
+		schemes = new ArrayList<Scheme>();
+		schemes.add(null);
+		Mockito.when(schemeService.viewAllDonations()).thenReturn(schemes);
+		ResponseEntity<List<Scheme>> actual = schemeController.viewAllDonations();
+		assertNotNull(actual);
 	}
 	
 }
