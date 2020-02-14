@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.donation.akshayapathra.constant.Constant;
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
@@ -68,9 +69,15 @@ public class SchemeController {
 	 * @throws SchemesNotFoundException - thrown when Schemes are not available
 	 * @since Feb-14-2020
 	 */
-	@GetMapping
+	@GetMapping()
 	public ResponseEntity<List<Scheme>> viewAllDonations() throws SchemeNotFoundException {
 		log.error("Entered into ViewAllDonations method in SchemeController ");
 		return ResponseEntity.ok().body(schemeService.viewAllDonations());
+	}
+	
+	@GetMapping("/analysis")
+	public ResponseEntity<List<AnalysisResponseDto>> getAnalysis(){
+		log.info("Entering into getAnalysis of SchemeController");
+		return new ResponseEntity<>(schemeService.getAnalysis(), HttpStatus.OK);
 	}
 }

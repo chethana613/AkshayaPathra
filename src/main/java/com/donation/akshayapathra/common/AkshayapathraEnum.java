@@ -8,8 +8,7 @@ public class AkshayapathraEnum {
 	 * @author Chethana
 	 * @since 14-02-2020
 	 */
-	public enum PaymentType {
-
-		PAYTM, PHONEPE;
+	public enum PaymentMode {
+			PAYTM, PHONEPE;
 	}
 }

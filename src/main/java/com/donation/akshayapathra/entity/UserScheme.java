@@ -3,13 +3,15 @@ package com.donation.akshayapathra.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentType;
+import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentMode;
 
 import lombok.Data;
 
@@ -25,7 +27,8 @@ public class UserScheme {
 	@ManyToOne
 	@JoinColumn(name = "scheme_id")
 	private Scheme schemeId;
-	private PaymentType paymentMode;
+	@Enumerated(EnumType.STRING)
+	private PaymentMode paymentMode;
 	private String paymentStatus;
 	private Byte taxInvoice;
 	private LocalDate date;
