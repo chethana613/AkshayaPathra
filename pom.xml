@@ -25,7 +25,10 @@
 			**/constant/*,
 			**/GlobalExceptionHandler.java,
 			**/AkshayaPathraApplication.java,
-			
+			**/PaymentService.java,
+			**/PaymentRegistry.java,
+			**/Paytm.java,
+			**/Phonepe.java,
 		</sonar.coverage.exclusions>
 	</properties>
 
