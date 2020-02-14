@@ -1,5 +1,7 @@
 package com.donation.akshayapathra.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,5 +25,6 @@ public class UserScheme {
 	private Scheme schemeId;
 	private String paymentMode;
 	private String paymentStatus;
-	private Byte taxObject;
+	private Byte taxInvoice;
+	private LocalDate date;
 }
