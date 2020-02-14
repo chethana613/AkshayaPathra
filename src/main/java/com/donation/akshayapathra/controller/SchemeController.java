@@ -57,7 +57,7 @@ public class SchemeController {
 			throw new SchemeNotFoundException(Constant.SCHEME_NOT_FOUND);
 		}
 		log.info("Entering into SchemeController getUserSchemes method: calling schemeService");
-		return new ResponseEntity<List<UserSchemeDto>>(schemeService.getUserSchemes(schemeId), HttpStatus.OK);
+		return new ResponseEntity<>(schemeService.getUserSchemes(schemeId), HttpStatus.OK);
 	}
 
 	/**

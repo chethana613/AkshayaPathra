@@ -11,7 +11,7 @@ public class SendMail {
 	@Autowired
 	MailSender mailSender;
 
-	public void SendMailToDonor(String toAddress, String subject, String msgBody) {
+	public void sendMailToDonor(String toAddress, String subject, String msgBody) {
 		SimpleMailMessage message= new SimpleMailMessage();
 		message.setFrom("muthupalaniappan552@gmail.com");
 		message.setTo(toAddress);
