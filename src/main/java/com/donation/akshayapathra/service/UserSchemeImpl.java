@@ -19,6 +19,7 @@ import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.repository.SchemeRepository;
 import com.donation.akshayapathra.repository.UserRepository;
 import com.donation.akshayapathra.repository.UserSchemeRepository;
+import com.donation.akshayapathra.util.SendMail;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,6 +46,9 @@ public class UserSchemeImpl implements UserSchemeService {
 
 	@Autowired
 	PaymentRegistry paymentRegistry;
+	
+	@Autowired
+	SendMail sendMail;
 
 	/**
 	 * This method is used to donatePayment for the charity based on any theme
@@ -87,6 +91,8 @@ public class UserSchemeImpl implements UserSchemeService {
 		userScheme.setDate(LocalDate.now());
 		userSchemeRepository.save(userScheme);
 
+		
+		
 		DonateResponseDto donateResponseDto = new DonateResponseDto();
 		donateResponseDto.setUserId(user.getUserId());
 		donateResponseDto.setName(user.getName());
@@ -102,6 +108,14 @@ public class UserSchemeImpl implements UserSchemeService {
 		
 		donateResponseDto.setTaxBenefitAmount(schemeResponse.get().getTaxBenefitAmount());
 		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
+		
+		sendEmail(donateResponseDto);
 		return donateResponseDto;
+	}
+	
+	public void sendEmail(DonateResponseDto donateResponseDto) {
+		log.info("Entering into sendEmail of UserSchemeImpl");
+		String message="Dear ".concat(donateResponseDto.getName()).concat("Thank you for donating");
+		sendMail.SendMailToDonor(donateResponseDto.getEmail(), "DONOR INVOICE", message);
 	}
 }
