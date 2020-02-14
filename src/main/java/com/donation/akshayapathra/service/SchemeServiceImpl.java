@@ -2,13 +2,16 @@ package com.donation.akshayapathra.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.donation.akshayapathra.constant.Constant;
+import com.donation.akshayapathra.dto.AnalysisResponseDto;
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
 import com.donation.akshayapathra.entity.UserScheme;
@@ -62,7 +65,8 @@ public class SchemeServiceImpl implements SchemeService{
     		BeanUtils.copyProperties(userScheme, userSchemeDto);
     		userSchemeDto.setSchemeId(userScheme.getSchemeId().getSchemeId());
     		userSchemeDto.setSchemeName(userScheme.getSchemeId().getSchemeName());
-    		userSchemeDto.setUserId(userScheme.getUserId().getUserId());
+    		userSchemeDto.setUserName(userScheme.getUserId().getName());
+    		userSchemeDto.setEmail(userScheme.getUserId().getEmail());
     		userSchemeDtos.add(userSchemeDto);
     	});
     	return userSchemeDtos;
@@ -88,4 +92,25 @@ public class SchemeServiceImpl implements SchemeService{
 		return schemes;
 	}
 
+	public List<AnalysisResponseDto> getAnalysis() {
+		log.info("Entering into getAnalysis method of SchemeServiceImpl");
+		List<UserScheme> userSchemeList=userSchemeRepository.findAll();
+		List<AnalysisResponseDto> analysisResponseDtoList= new ArrayList<>();
+		Map<Scheme,Integer> filteredSchemes=userSchemeList.stream().collect(Collectors.groupingBy(UserScheme::getSchemeId, Collectors.collectingAndThen(
+				Collectors.mapping(UserScheme::getSchemeId, Collectors.toList()), List::size)));
+		filteredSchemes.forEach((userScheme,schemeCount)->{
+			AnalysisResponseDto analysisResponseDto= new AnalysisResponseDto();
+			analysisResponseDto.setName(userScheme.getSchemeName());
+			analysisResponseDto.setSchemeId(userScheme.getSchemeId());
+			Double percentage = calculatePercentage(userSchemeList.size(), schemeCount);
+			analysisResponseDto.setY(percentage);
+			analysisResponseDtoList.add(analysisResponseDto);
+		}
+		);
+		return analysisResponseDtoList;		
+	}
+	private Double calculatePercentage(Integer totalCount, Integer rating) {
+		log.info("calculatePercentage method");
+		return ((Double.valueOf(rating) * 100) / totalCount);
+	}
 }

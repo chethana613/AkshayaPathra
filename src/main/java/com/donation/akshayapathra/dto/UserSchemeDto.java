@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 public class UserSchemeDto {
 
-	private Integer userId;
+	private String userName;
 	private Integer schemeId;
 	private String schemeName;
 	private String paymentMode;
-	private String paymentStatus;
+	private String email;
 	@JsonFormat(pattern="dd-MM-yyyy")
 	private LocalDate date;
 

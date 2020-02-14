@@ -2,7 +2,7 @@ package com.donation.akshayapathra.dto;
 
 import javax.validation.constraints.NotNull;
 
-import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentType;
+import com.donation.akshayapathra.common.AkshayapathraEnum.PaymentMode;
 
 import lombok.Data;
 
@@ -20,5 +20,5 @@ public class DonateRequestDto {
 	@NotNull(message="email cannot be null")
 	private String email;
 	@NotNull(message="paymentMode cannot be null")
-	private PaymentType paymentMode;
+	private PaymentMode paymentMode;
 }
