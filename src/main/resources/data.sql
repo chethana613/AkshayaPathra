@@ -1,0 +1,1 @@
+INSERT INTO `admin` (`admin_id`, `mobile`, `password`) VALUES ('1', '1234567890', 'start@123');
