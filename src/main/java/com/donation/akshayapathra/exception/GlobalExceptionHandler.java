@@ -12,8 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.donation.akshayapathra.dto.ErrorDto;
+
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -32,5 +36,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		body.put("errors", errors);
 		return new ResponseEntity<>(body, headers, HttpStatus.OK);
 	}
+	
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<ErrorDto> adminNotFoundException(AdminNotFoundException e) {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(e.getMessage());
+		errorDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return ResponseEntity.status(HttpStatus.OK).body(errorDto);
+	}
+	
+	@ExceptionHandler(SchemeNotFoundException.class)
+	public ResponseEntity<ErrorDto> schemeNotFoundException(SchemeNotFoundException e) {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(e.getMessage());
+		errorDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return ResponseEntity.status(HttpStatus.OK).body(errorDto);
+	}
+		
 
 }
