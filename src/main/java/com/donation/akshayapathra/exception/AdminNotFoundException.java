@@ -1,12 +1,11 @@
 package com.donation.akshayapathra.exception;
 
-public class SchemeNotFoundException extends Exception {
+public class AdminNotFoundException extends Exception {
 
 	private static final long serialVersionUID = -4311728065025497729L;
 
-	public SchemeNotFoundException(String exception) {
+	public AdminNotFoundException(String exception) {
 		super(exception);
 	}
-
 
 }

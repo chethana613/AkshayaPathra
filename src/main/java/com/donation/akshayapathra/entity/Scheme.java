@@ -13,7 +13,7 @@ public class Scheme {
 	private String schemeName;
 	private String description;
 	private double amount;
-	private double taxBenefitPercentage;
+	private double taxBenefitAmount;
 	private String taxBenefitDescription;
 	private String imageUrl;
 
