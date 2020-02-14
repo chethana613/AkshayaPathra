@@ -12,7 +12,7 @@ public class Constant {
 	public static final String NO_RECORDS_FOUND = "No Records Found";
 	public static final String AUTHENTICATION_SUCCESSFUL = "Authentication Successful";
 	public static final String AUTHENTICATION_FAILED = "Authentication Failed";
-
+	public static final String SCHEME_NOT_FOUND_EXCEPTION = "No Schemes Are Available!";
 	
 
 }
