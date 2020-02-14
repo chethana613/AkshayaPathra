@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.donation.akshayapathra.dto.UserSchemeDto;
 import com.donation.akshayapathra.entity.Scheme;
+import com.donation.akshayapathra.entity.User;
 import com.donation.akshayapathra.entity.UserScheme;
 import com.donation.akshayapathra.exception.SchemeNotFoundException;
 import com.donation.akshayapathra.repository.SchemeRepository;
@@ -39,10 +40,12 @@ public class SchemeServiceTest {
 	UserScheme userScheme = new UserScheme();
 	List<UserScheme> userSchemes = new ArrayList<>();
 	UserSchemeDto UserSchemeDto = new UserSchemeDto();
+	User user = new User();
 	
 	@Before
 	public void setUp() {
 	
+		user.setUserId(1);
 		scheme.setAmount(20000);
 		scheme.setDescription("for Cancer");
 		scheme.setImageUrl("https://www.worldvision.in/CMSAdmin/Uploads/06012020120226921Website-article.jpg");
@@ -50,7 +53,9 @@ public class SchemeServiceTest {
 		scheme.setTaxBenefitDescription("you will get under 80c");
 		scheme.setTaxBenefitAmount(5000);
 		schemes.add(scheme);
+		userScheme.setUserSchemeId(1);
 		userScheme.setSchemeId(scheme);
+		userScheme.setUserId(user);
 		userSchemes.add(userScheme);
 	}
 	

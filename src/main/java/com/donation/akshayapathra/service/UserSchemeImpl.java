@@ -111,6 +111,7 @@ public class UserSchemeImpl implements UserSchemeService {
 		donateResponseDto.setTaxBenefitDescription(schemeResponse.get().getTaxBenefitDescription());
 
 		sendEmail(donateResponseDto);
+
 		return donateResponseDto;
 	}
 
